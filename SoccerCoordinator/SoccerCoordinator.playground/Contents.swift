@@ -34,10 +34,8 @@ var inexperiencedPlayers: [[String : String]] = []
 var dragons: [[String : String]] = []
 var sharks: [[String : String]] = []
 var raptors: [[String : String]] = []
-// Constants for teams first practice
-let dragonsPractice = "March 17, 1pm"
-let sharksPractice = "March 17, 3pm"
-let raptorsPractice = "March 18, 1pm"
+// Number of teams in league
+let numberOfTeams: Int = 3
 
 
 // Sort experienced players from the inexperienced
@@ -52,11 +50,11 @@ for player in initialPlayerList {
 // If the experienced players are equal in number to the inexperienced players, assign them to the teams
 if (experiencedPlayers.count == inexperiencedPlayers.count) {
     for x in 0...experiencedPlayers.count - 1 {
-        if (x % 3 == 0) {
+        if (x % numberOfTeams == 0) {
             dragons.append(experiencedPlayers[x])
             dragons.append(inexperiencedPlayers[x])
         }
-        else if (x % 3 == 1) {
+        else if (x % numberOfTeams == 1) {
             sharks.append(experiencedPlayers[x])
             sharks.append(inexperiencedPlayers[x])
         }
@@ -67,13 +65,19 @@ if (experiencedPlayers.count == inexperiencedPlayers.count) {
     }
 }
 
-print("LETTERS:\n========")
-for player in dragons {
-    print("::Dear \(player["guardians"]!). Your child, \(player["name"]!), has been placed on the Dragons team this year. The first practice for this team will be \(dragonsPractice)")
+/* Prints letters to guardians with given arguments:
+-for team: Dictionary - Contains players for team
+-teamName name: String - Name of team
+-firstPractice date: String - Date of first practice
+ */
+func printLetters(for team: [[String : String]], teamName name: String, firstPractice date: String) {
+    print("LETTERS FOR TEAM: \(name)")
+    for player in team {
+        print("Dear \(player["guardians"]!). Your child, \(player["name"]!), has been placed on the \(name) team this year. The first will be held on \(date).")
+    }
 }
-for player in sharks {
-    print("::Dear \(player["guardians"]!). Your child, \(player["name"]!), has been placed on the Dragons team this year. The first practice for this team will be \(sharksPractice)")
-}
-for player in raptors {
-    print("::Dear \(player["guardians"]!). Your child, \(player["name"]!), has been placed on the Dragons team this year. The first practice for this team will be \(raptorsPractice)")
-}
+
+// Calls function to print out letters to guardians
+printLetters(for: dragons, teamName: "Dragons", firstPractice: "March 17, 1pm")
+printLetters(for: sharks, teamName: "Sharks", firstPractice: "March 17, 3pm")
+printLetters(for: raptors, teamName: "Raptors", firstPractice: "March 18, 1pm")
