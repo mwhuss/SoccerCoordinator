@@ -1,9 +1,11 @@
-/*  TeamTreeouse
+/*  
+    TeamTreeouse
     TechDegree - Project 1: SoccerCoordinator
     Bryan Huss 09/26/2016
 */
 
-// Initial data set
+// ===== VARIABLE INITIALIZATION =====
+// Total player data set
 let initialPlayerList: [[String : String]] = [
     ["name": "Joe Smith", "height": "42", "experienced": "true", "guardians": "Jim and Jan Smith"],
     ["name": "Jill Tanner", "height": "36", "experienced": "true", "guardians": "Clara Tanner"],
@@ -27,19 +29,51 @@ let initialPlayerList: [[String : String]] = [
 
 // Initialize dictionaries for experienced/inexperienced players
 var experiencedPlayers: [[String : String]] = []
-var inexperiencedPlauyers: [[String : String]] = []
-
-// Seperates the players into their respective dictionaries
-for player in initialPlayerList {
-    if player["experienced"] == "true" {
-        experiencedPlayers.append(player)
-    }
-    else {
-        inexperiencedPlauyers.append(player)
-    }
-}
-
-// Initialize dictionaries for the three seperate teams
+var inexperiencedPlayers: [[String : String]] = []
+// Initialize dictionaries for teams
 var dragons: [[String : String]] = []
 var sharks: [[String : String]] = []
 var raptors: [[String : String]] = []
+// Constants for teams first practice
+let dragonsPractice = "March 17, 1pm"
+let sharksPractice = "March 17, 3pm"
+let raptorsPractice = "March 18, 1pm"
+
+
+// Sort experienced players from the inexperienced
+for player in initialPlayerList {
+    if (player["experienced"] == "true") {
+        experiencedPlayers.append(player)
+    } else {
+        inexperiencedPlayers.append(player)
+    }
+}
+
+// If the experienced players are equal in number to the inexperienced players, assign them to the teams
+if (experiencedPlayers.count == inexperiencedPlayers.count) {
+    for x in 0...experiencedPlayers.count - 1 {
+        if (x % 3 == 0) {
+            dragons.append(experiencedPlayers[x])
+            dragons.append(inexperiencedPlayers[x])
+        }
+        else if (x % 3 == 1) {
+            sharks.append(experiencedPlayers[x])
+            sharks.append(inexperiencedPlayers[x])
+        }
+        else {
+            raptors.append(experiencedPlayers[x])
+            raptors.append(inexperiencedPlayers[x])
+        }
+    }
+}
+
+print("LETTERS:\n========")
+for player in dragons {
+    print("::Dear \(player["guardians"]!). Your child, \(player["name"]!), has been placed on the Dragons team this year. The first practice for this team will be \(dragonsPractice)")
+}
+for player in sharks {
+    print("::Dear \(player["guardians"]!). Your child, \(player["name"]!), has been placed on the Dragons team this year. The first practice for this team will be \(sharksPractice)")
+}
+for player in raptors {
+    print("::Dear \(player["guardians"]!). Your child, \(player["name"]!), has been placed on the Dragons team this year. The first practice for this team will be \(raptorsPractice)")
+}
